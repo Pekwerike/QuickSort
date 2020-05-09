@@ -1,12 +1,11 @@
 public class QuickSort<Item> implements Comparable<Item> {
-
     @Override
     public int compareTo(Item item) {
         return this.compareTo(item);
     }
 
     private static boolean less(Comparable a, Comparable b){
-        return a.compareTo(b) > 0;
+        return b.compareTo(a) > 0;
     }
 
     private static void exchange(Comparable[] inputArray, int i, int j){
@@ -16,7 +15,7 @@ public class QuickSort<Item> implements Comparable<Item> {
     }
 
     private static void sort(Comparable[] inputArray, int low, int high){
-        if(high >= low) return;
+        if(high <= low) return;
         int j = partition(inputArray, low, high);
         sort(inputArray,low, j-1 );
         sort(inputArray, j+1, high);
@@ -24,7 +23,7 @@ public class QuickSort<Item> implements Comparable<Item> {
 
     public void sort(Comparable[] inputArray){
         int low = 0;
-        int high = inputArray.length - 1;
+        int high = inputArray.length -1;
         sort(inputArray, low, high);
     }
 
@@ -34,16 +33,16 @@ public class QuickSort<Item> implements Comparable<Item> {
 
         while(true){
             while(less(inputArray[i], inputArray[low])){
-                i = i + 1;
                 if(i == high) break;
+                i = i + 1;
             }
 
-            while(!less(inputArray[j], inputArray[low])){
-                j = j - 1;
+            while(less(inputArray[low], inputArray[j])){
                 if(j == low) break;
+                j = j - 1;
             }
 
-            if(j >= i) break;
+            if(j <= i) break;
             exchange(inputArray, i, j);
         }
         exchange(inputArray, low, j);
